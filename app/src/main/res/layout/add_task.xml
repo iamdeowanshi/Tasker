@@ -1,44 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/addTask">
+    android:paddingLeft="10dp"
+    android:paddingRight="5dp"
+    android:id="@+id/addTask"
+    android:background="#2199c0">
+
+
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="What is to be done ?"
         android:id="@+id/textTask"
-        android:layout_marginTop="20dp"
-        android:textSize="36sp"/>
+        android:layout_marginTop="30dp"
+        android:textSize="20sp"/>
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Enter Task Here."
-        android:textSize="25sp"
+        android:textSize="15sp"
         android:layout_marginTop="20dp"
-        android:id="@+id/editTextTask" />
+        android:id="@+id/editTextTask"
+        android:layout_below="@+id/textTask"/>
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Due Date"
-        android:textSize="30sp"
+        android:textSize="20sp"
         android:layout_marginTop="20dp"
-        android:id="@+id/textDate" />
+        android:id="@+id/textDate"
+        android:layout_below="@+id/editTextTask"/>
+
 <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginTop="20dp"
-    android:orientation="horizontal">
+    android:orientation="horizontal"
+    android:id="@+id/dateLayout"
+    android:layout_below="@+id/textDate">
 
     <EditText
         android:layout_width="320dp"
         android:layout_height="wrap_content"
         android:layout_gravity="fill_horizontal"
-        android:layout_marginTop="15dp"
-        android:textSize="25sp"
+        android:layout_marginTop="20dp"
+        android:textSize="15sp"
         android:layout_weight="1"
         android:hint="Date Not Set"
         android:id="@+id/editTextDate" />
@@ -47,7 +57,7 @@
        android:layout_width="match_parent"
        android:layout_height="match_parent"
        android:id="@+id/calIcon"
-       android:layout_weight="7"
+       android:layout_weight="8"
        android:src="@drawable/calendar" />
 </LinearLayout>
 
@@ -56,22 +66,35 @@
         android:layout_height="wrap_content"
         android:text="Add to List"
         android:id="@+id/textList"
-        android:textSize="30sp"/>
+        android:textSize="20sp"
+        android:layout_below="@+id/dateLayout"/>
 <LinearLayout
-    android:layout_width="match_parent"
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:orientation="horizontal">
-    <Spinner
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/spinner" />
+    android:orientation="horizontal"
+    android:id="@+id/listLayout"
+    android:layout_below="@+id/textList"
+    >
 
-    <ImageButton
+    <Spinner
+        android:id="@+id/listSpinner"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_weight="1"/>
+    <ImageView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:src="@drawable/add_list"
-        android:id="@+id/listIcon"
-        android:layout_weight="7"/>
+        android:layout_weight="5"/>
 </LinearLayout>
 
-</LinearLayout>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ADD"
+        android:layout_below="@+id/listLayout"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"/>
+
+</RelativeLayout>
