@@ -23,7 +23,7 @@
             android:theme="@style/AddTheme" >
         </activity>
         <activity
-            android:name=".Task"
+            android:name=".TaskActivity"
             android:label="@string/title_activity_login" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
