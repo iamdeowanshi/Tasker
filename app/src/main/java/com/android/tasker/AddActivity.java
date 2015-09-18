@@ -1,11 +1,17 @@
 package com.android.tasker;
 
+import android.app.DatePickerDialog;
+import android.app.TimePickerDialog;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.TimePicker;
+
+import java.util.Calendar;
 
 /**
  * Created by Sibi on 15/09/15.
@@ -13,9 +19,11 @@ import android.widget.Spinner;
 public class AddActivity extends AppCompatActivity {
 
     private Spinner list;
-    private ImageView date;
     private EditText edtDate;
     private EditText taskName;
+    private EditText edtTime;
+    int mDay,mMonth,mYear;
+    int min,hr;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,41 +35,52 @@ public class AddActivity extends AppCompatActivity {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         list.setAdapter(adapter);
 
-        date = (ImageView) findViewById(R.id.calIcon);
         taskName = (EditText) findViewById(R.id.editTextTask);
         edtDate = (EditText) findViewById(R.id.editTextDate);
-      /* date.setOnClickListener(new View.OnClickListener() {
+      edtDate.setOnClickListener(new View.OnClickListener() {
+          @Override
+          public void onClick(View v) {
+              Calendar currentDate = Calendar.getInstance();
+              mYear = currentDate.get(Calendar.YEAR);
+              mMonth = currentDate.get(Calendar.MONTH);
+              mDay = currentDate.get(Calendar.DAY_OF_MONTH);
+
+              DatePickerDialog mDatePicker = new DatePickerDialog(AddActivity.this, new DatePickerDialog.OnDateSetListener() {
+                  public void onDateSet(DatePicker datepicker, int selectedyear, int selectedmonth, int selectedday) {
+
+                  }
+              }, mYear, mMonth, mDay);
+              mDatePicker.setTitle("Select date");
+              mDatePicker.show();
+          }
+      });
+
+        edtDate.setText(mDay + "-" + mMonth + "-" + mYear);
+
+        edtTime = (EditText)findViewById(R.id.editTextTime);
+        edtTime.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                alertDialogDatePicker();
-            }
-        });
+                Calendar currentTime = Calendar.getInstance();
+                min = currentTime.get(Calendar.MINUTE);
+                hr = currentTime.get(Calendar.HOUR);
 
+                TimePickerDialog mTimePicker = new TimePickerDialog(AddActivity.this, new TimePickerDialog.OnTimeSetListener() {
+                    @Override
+                    public void onTimeSet(TimePicker timePicker, int i, int i1) {
+                        edtTime.setText(hr + ":" + min);
+                    }
+                }, hr, min);
+                mTimePicker.setTitle("Select Time");
+                mTimePicker.show();
+
+            }
+
+
+    });
         android.support.v7.app.ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
-    }*/
-
-  /*  private void alertDialogDatePicker() {
-        LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View view = inflater.inflate(R.layout.date_picker, null, false);
-
-        final DatePicker myDatePicker = (DatePicker) view.findViewById(R.id.myDatePicker);
-
-        myDatePicker.setCalendarViewShown(false);
-
-        new AlertDialog.Builder(AddActivity.this)
-                .setView(view)
-                .setTitle("Set Date")
-                .setPositiveButton("Go", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        int month = myDatePicker.getMonth() + 1;
-                        int day = myDatePicker.getDayOfMonth();
-                        int year = myDatePicker.getYear();
-
-                        edtDate.setText(day + "-" + month + "-" + year);
-                        dialog.cancel();
-                    }
-                }).show();
-    }*/
     }
+
+
 }
