@@ -1,8 +1,5 @@
 package com.android.tasker.model;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * Created by Sibi on 16/09/15.
  */
@@ -10,23 +7,15 @@ public class TaskList {
 
     private int id;
     private String name;
-    private List<Task> tasks = new ArrayList<Task>();
-    private User user;
+    private int userId;
 
-    TaskList() {
-
+    public TaskList() {
     }
 
-    public TaskList(String name) {
+    public TaskList(int id, String name, int userId) {
+        this.id = id;
         this.name = name;
-    }
-
-    public List<Task> getTasks() {
-        return tasks;
-    }
-
-    public void setTasks(List<Task> tasks) {
-        this.tasks = tasks;
+        this.userId = userId;
     }
 
     public int getId() {
@@ -45,12 +34,12 @@ public class TaskList {
         this.name = name;
     }
 
-    public User getUser() {
-        return user;
+    public int getUserId() {
+        return userId;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 
 }

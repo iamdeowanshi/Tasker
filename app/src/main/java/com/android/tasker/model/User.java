@@ -1,8 +1,5 @@
 package com.android.tasker.model;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * Created by Sibi on 16/09/15.
  */
@@ -13,23 +10,18 @@ public class User {
     private String email;
     private String password;
     private String image;
-    private List<TaskList> taskList = new ArrayList<TaskList>();
+    private String accessToken;
 
     public User() {
     }
 
-    public User(String name, String email, String password) {
+    public User(int id, String name, String email, String password, String image, String accessToken) {
+        this.id = id;
         this.name = name;
         this.email = email;
         this.password = password;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
+        this.image = image;
+        this.accessToken = accessToken;
     }
 
     public int getId() {
@@ -56,6 +48,14 @@ public class User {
         this.email = email;
     }
 
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
     public String getImage() {
         return image;
     }
@@ -64,12 +64,12 @@ public class User {
         this.image = image;
     }
 
-    public List<TaskList> getTaskList() {
-        return taskList;
+    public String getAccessToken() {
+        return accessToken;
     }
 
-    public void setTaskList(List<TaskList> taskList) {
-        this.taskList = taskList;
+    public void setAccessToken(String accessToken) {
+        this.accessToken = accessToken;
     }
 
 }

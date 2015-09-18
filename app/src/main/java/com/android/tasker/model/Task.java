@@ -10,32 +10,18 @@ public class Task {
     private String date;
     private String time;
     private boolean finished;
-    private TaskList taskList;
+    private int taskListId;
 
     public Task() {
     }
-/*
-    public Task(String name, String date, String time, boolean finished, TaskList taskList) {
+
+    public Task(int id, String name, String date, String time, boolean finished, int taskListId) {
+        this.id = id;
         this.name = name;
         this.date = date;
         this.time = time;
         this.finished = finished;
-        this.taskList = taskList;
-    }*/
-
-    public Task(String name, String date, String time, boolean finished) {
-        this.name = name;
-        this.date = date;
-        this.time = time;
-        this.finished = finished;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String taskName) {
-        this.name = taskName;
+        this.taskListId = taskListId;
     }
 
     public int getId() {
@@ -44,6 +30,14 @@ public class Task {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getDate() {
@@ -70,13 +64,12 @@ public class Task {
         this.finished = finished;
     }
 
-    public TaskList getTaskList() {
-        return taskList;
+    public int getTaskListId() {
+        return taskListId;
     }
 
-    public void setTaskList(TaskList taskList) {
-        this.taskList = taskList;
+    public void setTaskListId(int taskListId) {
+        this.taskListId = taskListId;
     }
-
 
 }

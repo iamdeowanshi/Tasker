@@ -11,19 +11,19 @@ import java.util.List;
  */
 public interface TaskRepoInterface {
 
-    User register(User user);
-
     int getUserId();
-
-    String getAccessToken();
 
     void setAccessToken();
 
+    String getAccessToken();
+
     void setUserId();
+
+    User register(User user);
 
     User login(String email, String password);
 
-    User updateProfilePic(User user);
+    User updateProfilePic(String profilePicUrl);
 
     // task list operations
     List<TaskList> getTaskLists();
@@ -32,7 +32,7 @@ public interface TaskRepoInterface {
 
     TaskList updateTaskList(TaskList list);
 
-    Boolean deleteTaskList(int taskListId);
+    TaskList deleteTaskList(int taskListId);
 
     // task operations
 
@@ -40,8 +40,8 @@ public interface TaskRepoInterface {
 
     Task createTask(Task task);
 
-    Boolean updateTask(Task task);
+    Task updateTask(Task task);
 
-    Boolean deleteTask(int taskId);
+    Task deleteTask(int taskId);
 
 }
