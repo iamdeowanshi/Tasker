@@ -41,7 +41,7 @@ public class TaskRepoMockImpl extends AbstractTaskRepo {
 
     @Override
     public User login(String email, String password) {
-        if (user.getEmail().equals(email) &&  user.getPassword().equals(password)) {
+        if (user != null && user.getEmail().equals(email) &&  user.getPassword().equals(password)) {
             return user;
         }
 

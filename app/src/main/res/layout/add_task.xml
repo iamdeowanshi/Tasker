@@ -21,10 +21,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Enter Task Here."
-        android:textSize="15sp"
+        android:textSize="23sp"
         android:layout_marginTop="20dp"
         android:id="@+id/editTextTask"
-        android:layout_below="@+id/textTask"/>
+        android:background="@drawable/curved_edit_text"
+        android:layout_below="@+id/textTask"
+        android:paddingLeft="5dp"/>
 
     <TextView
         android:layout_width="match_parent"
@@ -38,7 +40,6 @@
 <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginTop="20dp"
     android:orientation="vertical"
     android:id="@+id/dateLayout"
     android:layout_below="@+id/textDate">
@@ -48,7 +49,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="fill_horizontal"
         android:layout_marginTop="20dp"
-        android:textSize="18sp"
+        android:textSize="23sp"
         android:hint="Date Not Set"
         android:id="@+id/editTextDate"
         android:editable="false"
@@ -59,7 +60,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/editTextTime"
-        android:textSize="18sp"
+        android:textSize="23sp"
         android:paddingLeft="5dp"
         android:hint="Time Not Set"
         android:layout_marginTop="20dp"

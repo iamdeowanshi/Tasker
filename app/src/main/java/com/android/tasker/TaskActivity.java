@@ -6,6 +6,8 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 
 public class TaskActivity extends AppCompatActivity {
@@ -23,8 +25,9 @@ public class TaskActivity extends AppCompatActivity {
 
         mTitle = getTitle();
         mDrawerTitle = "TaskActivity List";
+        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         android.support.v7.app.ActionBar actionBar = getSupportActionBar();
-        actionBar.setDisplayHomeAsUpEnabled(true);
+        //actionBar.setDisplayHomeAsUpEnabled(true);
 
         addTask = (FloatingActionButton)findViewById(R.id.fab);
 
@@ -36,7 +39,6 @@ public class TaskActivity extends AppCompatActivity {
             }
         });
 
-        mDrawerLayout = (DrawerLayout)findViewById(R.id.drawer_layout);
         mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, null, R.string.drawer_open, R.string.drawer_close ) {
 
             /** Called when a drawer has settled in a completely closed state. */
@@ -57,7 +59,10 @@ public class TaskActivity extends AppCompatActivity {
 
     }
 
-
-
-
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.home, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
 }

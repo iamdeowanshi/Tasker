@@ -9,7 +9,7 @@ public class RepositoryFactory {
 
     public static TaskRepoInterface getTaskRepo() {
         if (repo == null) {
-            new TaskRepoMockImpl();
+            repo = new TaskRepoMockImpl();
         }
 
         return repo;

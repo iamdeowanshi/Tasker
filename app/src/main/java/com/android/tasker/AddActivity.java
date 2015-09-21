@@ -37,6 +37,8 @@ public class AddActivity extends AppCompatActivity {
 
         taskName = (EditText) findViewById(R.id.editTextTask);
         edtDate = (EditText) findViewById(R.id.editTextDate);
+        edtTime = (EditText)findViewById(R.id.editTextTime);
+
       edtDate.setOnClickListener(new View.OnClickListener() {
           @Override
           public void onClick(View v) {
@@ -57,7 +59,6 @@ public class AddActivity extends AppCompatActivity {
 
         edtDate.setText(mDay + "-" + mMonth + "-" + mYear);
 
-        edtTime = (EditText)findViewById(R.id.editTextTime);
         edtTime.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -67,10 +68,10 @@ public class AddActivity extends AppCompatActivity {
 
                 TimePickerDialog mTimePicker = new TimePickerDialog(AddActivity.this, new TimePickerDialog.OnTimeSetListener() {
                     @Override
-                    public void onTimeSet(TimePicker timePicker, int i, int i1) {
-                        edtTime.setText(hr + ":" + min);
+                    public void onTimeSet(TimePicker timePicker, int hr, int min) {
+                        edtTime.setText( hr + ":" + min);
                     }
-                }, hr, min);
+                }, hr, min, true);
                 mTimePicker.setTitle("Select Time");
                 mTimePicker.show();
 

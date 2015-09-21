@@ -11,8 +11,13 @@ public class User {
     private String password;
     private String image;
     private String accessToken;
-
     public User() {
+    }
+
+    public User(String name, String email, String password) {
+        this.name = name;
+        this.email = email;
+        this.password = password;
     }
 
     public User(int id, String name, String email, String password, String image, String accessToken) {
@@ -71,5 +76,6 @@ public class User {
     public void setAccessToken(String accessToken) {
         this.accessToken = accessToken;
     }
+
 
 }

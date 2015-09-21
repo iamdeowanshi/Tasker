@@ -7,20 +7,10 @@
     tools:context="com.android.tasker.RegisterActivity"
     android:background="#2199c0">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Registeration"
-        android:layout_centerHorizontal="true"
-        android:textColor="#393939"
-        android:textSize="40dp"
-        android:id="@+id/textTitle" />
-
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="44dp"
-        android:layout_below="@+id/textTitle"
         android:layout_alignParentStart="true"
         android:id="@+id/textName"
         android:hint="Enter Name" />
@@ -52,32 +42,14 @@
         android:layout_below="@+id/textPassword"
         android:layout_marginTop="15dp"/>
 
-    <com.github.siyamed.shapeimageview.CircularImageView
-       android:layout_width="100dp"
-       android:layout_height="100dp"
-       android:layout_below="@+id/textConfirmPassword"
-       android:layout_marginTop="15dp"
-       android:src="@drawable/user"
-       android:layout_marginLeft="20dp"
-       android:id="@+id/imageUser" />
-
     <Button
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Select Image"
-        android:id="@+id/buttonSelect"
-        android:layout_alignTop="@+id/imageUser"
-        android:layout_alignEnd="@+id/textConfirmPassword"
-        android:layout_marginEnd="45dp"
-        android:layout_marginTop="28dp" />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text=" Register "
+        android:text=" Sign Up "
         android:id="@+id/buttonRegister"
         android:textSize="20sp"
-        android:layout_below="@+id/imageUser"
+        android:layout_below="@+id/textConfirmPassword"
+        android:background="@drawable/curved_button"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"/>
 

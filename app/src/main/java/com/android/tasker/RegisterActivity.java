@@ -1,38 +1,81 @@
 package com.android.tasker;
 
-import android.content.DialogInterface;
-import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.provider.MediaStore;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
+import android.widget.EditText;
+import android.widget.Toast;
+
+import com.android.tasker.model.User;
+import com.android.tasker.repository.RepositoryFactory;
+import com.android.tasker.repository.TaskRepoInterface;
 
 public class RegisterActivity extends AppCompatActivity {
 
-    private Button selectImage;
-    private ImageView imageView;
-    private static final int CAMERA_CAPTURE_IMAGE_REQUEST_CODE = 100;
-    public static final int MEDIA_TYPE_IMAGE = 1;
-
+    private Button signUp;
+    private EditText name;
+    private EditText email;
+    private EditText password;
+    private EditText confirmPassword;
+    private SharedPreferences userData;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
-        selectImage = (Button)findViewById(R.id.buttonSelect);
-        imageView = (ImageView)findViewById(R.id.imageUser);
-
-        selectImage.setOnClickListener(new View.OnClickListener() {
+        name = (EditText)findViewById(R.id.textName);
+        email = (EditText)findViewById(R.id.textEmail);
+        password = (EditText)findViewById(R.id.textPassword);
+        confirmPassword = (EditText)findViewById(R.id.textConfirmPassword);
+        signUp = (Button)findViewById(R.id.buttonRegister);
+        userData = getPreferences(MODE_PRIVATE);
+        signUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                selectOption();
+                String userName = name.getText().toString();
+                String userEmail = email.getText().toString();
+                String userPassword = password.getText().toString();
+                String userConfirmPassword = confirmPassword.getText().toString();
+                boolean correctEmail = isValidEmail((CharSequence) userEmail);
+
+                if(userName != null && correctEmail && userPassword != null && userConfirmPassword.equals(userPassword)) {
+
+                    SharedPreferences.Editor editor = userData.edit();
+                    editor.putString("name", userName);
+                    editor.putString("email", userEmail);
+                    editor.putString("password", userPassword);
+                    editor.commit();
+
+
+                    User user = new User(userName, userEmail, userPassword);
+
+                    TaskRepoInterface taskRepo = RepositoryFactory.getTaskRepo();
+                    taskRepo.register(user);
+
+                    Toast.makeText(getApplicationContext(), "Registered", Toast.LENGTH_SHORT).show();
+
+                    finish();
+                }
+                else {
+                    Toast.makeText(getApplicationContext(), "Try Again", Toast.LENGTH_SHORT).show();
+                }
             }
         });
+
+
+
     }
 
+    public final static boolean isValidEmail(CharSequence target) {
+        if (target == null) {
+            return false;
+        } else {
+            return android.util.Patterns.EMAIL_ADDRESS.matcher(target).matches();
+        }
+    }
+/*
     void selectOption() {
             final CharSequence[] items = { "Take Photo", "Choose from Gallery", "Cancel" };
             AlertDialog.Builder builder = new AlertDialog.Builder(RegisterActivity.this);
@@ -56,5 +99,5 @@ public class RegisterActivity extends AppCompatActivity {
                 }
             });
             builder.show();
-    }
+    }*/
 }
