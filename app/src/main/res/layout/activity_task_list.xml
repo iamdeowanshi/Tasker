@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+android:layout_height="match_parent">
+
+<include
+    android:id="@+id/toolbar_actionbar"
+    layout="@layout/tool_bar"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" />
+
+<android.support.v4.widget.DrawerLayout
+    android:id="@+id/drawer"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_below="@+id/toolbar_actionbar">
+
+    <FrameLayout
+        android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#fff"
+        android:clickable="true">
+
+        <ListView
+            android:id="@+id/tasksList"
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:clickable="true"
+            android:focusableInTouchMode="true"
+            android:scrollbars="vertical"
+            android:focusable="true"
+            android:fitsSystemWindows="true"
+            android:layout_height="match_parent"
+            android:background="#fff"/>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="30dp"
+        android:layout_marginRight="30dp"
+        android:src="@drawable/fab"
+        app:borderWidth="0dp"
+        app:elevation="8dp"
+        app:fabSize="normal"
+        app:layout_anchorGravity="bottom|right"
+        app:rippleColor="#7fffb2"
+        android:layout_gravity="right|bottom"/>
+    </FrameLayout>
+
+    <fragment
+        android:id="@+id/fragment_drawer"
+        android:name="com.android.tasker.NavigationDrawerFragment"
+        android:layout_width="240dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        app:layout="@layout/drawer_layout"
+        tools:layout="@layout/activity_task_list" />
+</android.support.v4.widget.DrawerLayout>
+</RelativeLayout>
+

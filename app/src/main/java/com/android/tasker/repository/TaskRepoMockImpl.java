@@ -17,7 +17,9 @@ public class TaskRepoMockImpl extends AbstractTaskRepo {
     private List<Task> tasks = new ArrayList<>();
 
     public TaskRepoMockImpl() {
-        // sample task lists
+        user = new User(1, "Aaditya", "aadity@tecol.com", "1234", "https://pbs.twimg.com/profile_images/2156251289/MrBean.jpg", "AQ12adakfine#Fsdlj");
+
+        // sample activity_task_list lists
         taskLists.add(new TaskList(1, "Personal", 1));
         taskLists.add(new TaskList(2, "Work", 1));
         taskLists.add(new TaskList(3, "Default", 1));

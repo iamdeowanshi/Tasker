@@ -10,12 +10,14 @@ public class TaskList {
     private int userId;
 
     public TaskList() {
+
     }
 
     public TaskList(int id, String name, int userId) {
         this.id = id;
         this.name = name;
         this.userId = userId;
+
     }
 
     public int getId() {

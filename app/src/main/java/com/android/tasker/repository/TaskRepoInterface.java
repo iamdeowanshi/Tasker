@@ -25,7 +25,7 @@ public interface TaskRepoInterface {
 
     User updateProfilePic(String profilePicUrl);
 
-    // task list operations
+    // activity_task_list list operations
     List<TaskList> getTaskLists();
 
     TaskList createTaskList(TaskList list);
@@ -34,7 +34,7 @@ public interface TaskRepoInterface {
 
     TaskList deleteTaskList(int taskListId);
 
-    // task operations
+    // activity_task_list operations
 
     List<Task> getTasks(int taskListId);
 

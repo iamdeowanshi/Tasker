@@ -1,8 +1,8 @@
 package com.android.tasker;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
@@ -14,7 +14,7 @@ import com.android.tasker.model.User;
 import com.android.tasker.repository.RepositoryFactory;
 import com.android.tasker.repository.TaskRepoInterface;
 
-public class LoginActivity extends AppCompatActivity {
+public class LoginActivity extends Activity {
 
     private TextView registerLink;
     private Button login;
@@ -46,7 +46,7 @@ public class LoginActivity extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), "Email or Password Incorrect", Toast.LENGTH_SHORT).show();
 
                 else {
-                    Intent intent = new Intent(getApplicationContext(), TaskActivity.class);
+                    Intent intent = new Intent(getApplicationContext(), TaskListActivity.class);
                     startActivity(intent);
 
                 }

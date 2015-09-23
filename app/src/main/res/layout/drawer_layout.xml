@@ -1,28 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="240dp"
+<android.support.v7.widget.RecyclerView
+    android:id="@+id/drawerList"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:clickable="true"
+    android:focusableInTouchMode="true"
+    android:scrollbars="vertical"
+    android:focusable="true"
+    android:fitsSystemWindows="true"
     android:layout_height="match_parent"
-    android:id="@+id/drawer_layout">
+    android:background="#fff"/>
 
-    <com.github.siyamed.shapeimageview.CircularImageView
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="50dp"
-        android:src="@drawable/user"
-        android:id="@+id/imageDisplay"/>
+<!--<?xml version="1.0" encoding="utf-8"?>-->
+<!--<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
+    <!--android:orientation="vertical" android:layout_width="240dp"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:id="@+id/drawer_layout">-->
 
-    <ListView xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:divider="@android:color/transparent" android:dividerHeight="0dp"
-        android:background="#cccc" tools:context="com.android.tasker.NavigationDrawerFragment"
-        android:layout_below="@+id/imageDisplay"
-        android:id="@+id/list_slidermenu"
-        android:layout_width="240dp"
-        android:layout_marginTop="20dp"
-        android:layout_height="match_parent"
-        android:layout_gravity="start"
-        android:choiceMode="singleChoice"
-        android:entries="@array/list"/>
+    <!--<com.github.siyamed.shapeimageview.CircularImageView-->
+        <!--android:layout_width="100dp"-->
+        <!--android:layout_height="100dp"-->
+        <!--android:layout_centerHorizontal="true"-->
+        <!--android:layout_marginTop="50dp"-->
+        <!--android:src="@drawable/user"-->
+        <!--android:id="@+id/imageDisplay"/>-->
 
-</RelativeLayout>
+    <!--<ListView xmlns:android="http://schemas.android.com/apk/res/android"-->
+        <!--xmlns:tools="http://schemas.android.com/tools"-->
+        <!--android:divider="@android:color/transparent" android:dividerHeight="0dp"-->
+        <!--android:background="#cccc"-->
+        <!--tools:context="com.android.tasker.NavigationDrawerFragment"-->
+        <!--android:layout_below="@+id/imageDisplay"-->
+        <!--android:id="@+id/list_slidermenu"-->
+        <!--android:layout_width="240dp"-->
+        <!--android:layout_marginTop="20dp"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:layout_gravity="start"-->
+        <!--android:choiceMode="singleChoice"-->
+        <!--android:entries="@array/list"/>-->
+
+<!--</RelativeLayout>-->

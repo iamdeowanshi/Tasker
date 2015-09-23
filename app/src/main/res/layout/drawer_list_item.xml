@@ -1,0 +1,18 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="48dp"
+    android:id="@+id/drawer_list">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="10dp"
+        android:gravity="center_vertical"
+        android:textAllCaps="false"
+        android:textColor="#424242"
+        android:textSize="18sp"
+        android:id="@+id/textListItem"/>
+
+</RelativeLayout>

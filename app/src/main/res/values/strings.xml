@@ -8,14 +8,14 @@
 
     <!-- Nav Drawer List Item Icons -->
     <!-- Keep them in order as the titles are in -->
-    <array name="list">
-        <item>Default</item>
-        <item>Work</item>
-        <item>Personal</item>
-        <item>Shopping</item>
-        <item>Wishlist</item>
-        <item>All List</item>
-    </array>
+    <!--<array name="list">-->
+        <!--<item>Default</item>-->
+        <!--<item>Work</item>-->
+        <!--<item>Personal</item>-->
+        <!--<item>Shopping</item>-->
+        <!--<item>Wishlist</item>-->
+        <!--<item>All List</item>-->
+    <!--</array>-->
 
     <!-- Content Description -->
     <string name="desc_list_item_icon">Item Icon</string>
@@ -24,12 +24,8 @@
     <string name="title_section1">Section 1</string>
     <string name="title_section2">Section 2</string>
     <string name="title_section3">Section 3</string>
+    <string name="title_activity_login">To-do</string>
 
-
-    <string name="action_example">Example action</string>
-    <string name="title_activity_login">Task</string>
-
-    <string name="hello_world">Hello world!</string>
-    <string name="title_activity_register">RegisterActivity</string>
+    <string name="title_activity_register">Sign-Up</string>
 
 </resources>
