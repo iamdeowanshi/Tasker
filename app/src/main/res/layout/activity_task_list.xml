@@ -3,13 +3,25 @@
 xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-android:layout_height="match_parent">
+android:layout_height="match_parent"
+    android:background="#000">
 
 <include
     android:id="@+id/toolbar_actionbar"
     layout="@layout/tool_bar"
     android:layout_width="match_parent"
     android:layout_height="wrap_content" />
+
+
+    <fragment
+        android:id="@+id/fragment_task_list"
+        android:name="com.android.tasker.TaskListItems"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:layout="@layout/task_items"
+        android:layout_below="@id/toolbar_actionbar"/>
+
 
 <android.support.v4.widget.DrawerLayout
     android:id="@+id/drawer"
@@ -20,21 +32,12 @@ android:layout_height="match_parent">
     <FrameLayout
         android:id="@+id/container"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="#fff"
+        android:layout_height="wrap_content"
+        android:background="#c962acbb"
         android:clickable="true">
 
-        <ListView
-            android:id="@+id/tasksList"
-            xmlns:android="http://schemas.android.com/apk/res/android"
-            android:layout_width="match_parent"
-            android:clickable="true"
-            android:focusableInTouchMode="true"
-            android:scrollbars="vertical"
-            android:focusable="true"
-            android:fitsSystemWindows="true"
-            android:layout_height="match_parent"
-            android:background="#fff"/>
+
+
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab"
@@ -57,8 +60,7 @@ android:layout_height="match_parent">
         android:layout_width="240dp"
         android:layout_height="match_parent"
         android:layout_gravity="start"
-        app:layout="@layout/drawer_layout"
-        tools:layout="@layout/activity_task_list" />
+        app:layout="@layout/drawer_layout" />
 </android.support.v4.widget.DrawerLayout>
 </RelativeLayout>
 

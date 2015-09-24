@@ -1,8 +1,9 @@
 package com.android.tasker;
 
-import android.app.AlertDialog;
 import android.app.DatePickerDialog;
+import android.app.Dialog;
 import android.app.TimePickerDialog;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -15,6 +16,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import com.android.tasker.model.TaskList;
 import com.android.tasker.repository.RepositoryFactory;
@@ -37,12 +39,7 @@ public class AddTaskActivity extends AppCompatActivity {
     int mDay,mMonth,mYear;
     TaskList taskList;
     int min,hr;
-
-
-    @Override
-    public String toString() {
-        return taskList.getName();
-    }
+    private Context context = this;
 
 
     @Override
@@ -71,12 +68,34 @@ public class AddTaskActivity extends AppCompatActivity {
         imageAddList.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AlertDialog dialog = new AlertDialog.Builder(AddTaskActivity.this).create(); //Read Update
-                dialog.setContentView(R.layout.add_list);
-                dialog.setTitle("Add New Task List");
+                // create a Dialog component
+                final Dialog dialog = new Dialog(context);
 
-                final EditText editTextKeywordToBlock=(EditText)dialog.findViewById(R.id.editTextAddList);
-                Button buttonAddList=(Button)dialog.findViewById(R.id.buttonAddList);
+                //tell the Dialog to use the dialog.xml as it's layout description
+                dialog.setContentView(R.layout.add_list);
+                dialog.setTitle("Add New TaskList");
+
+                final EditText listEditText = (EditText) dialog.findViewById(R.id.editTextAddList);
+                Button addButton = (Button) dialog.findViewById(R.id.buttonAddList);
+
+                addButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        String listName = listEditText.getText().toString();
+
+                        if(!listName.equals(null)) {
+                            TaskList taskList = new TaskList();
+                            taskList.setName(listName);
+
+                            dialog.dismiss();
+                        }
+
+                        else {
+                            Toast.makeText(getApplicationContext(), "Enter Name" ,Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+
                 dialog.show();
             }
 

@@ -20,6 +20,10 @@ public class TaskList {
 
     }
 
+    @Override
+    public String toString() {
+        return getName();
+    }
     public int getId() {
         return id;
     }

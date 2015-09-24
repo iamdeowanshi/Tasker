@@ -8,7 +8,6 @@ import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.android.tasker.model.Task;
@@ -16,7 +15,6 @@ import com.android.tasker.model.TaskList;
 import com.android.tasker.repository.RepositoryFactory;
 import com.android.tasker.repository.TaskRepoInterface;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class TaskListActivity extends ActionBarActivity implements NavigationCallBacks {
@@ -26,11 +24,10 @@ public class TaskListActivity extends ActionBarActivity implements NavigationCal
     private List<TaskList> taskListItems;
     private DrawerLayout mDrawerLayout;
     private ListView tasksList;
-    private ArrayList<Task> taskItems;
+    private List<Task> taskItems;
     private ListView mDrawerList;
     private ActionBarDrawerToggle mDrawerToggle;
     private String mTitle = "Navigation Drawer";
-    private String[] items;
     private int selectedPosition;
     private Toolbar mToolbar;
 
@@ -40,16 +37,11 @@ public class TaskListActivity extends ActionBarActivity implements NavigationCal
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_task_list);
-
-        taskItems = (ArrayList<Task>) RepositoryFactory.getTaskRepo().getTasks(getTaskId());
-        tasksList = (ListView) findViewById(R.id.tasksList);
-        ArrayAdapter<Task> taskAdapter = new ArrayAdapter<Task>(this, android.R.layout.simple_list_item_1, taskItems);
-        tasksList.setAdapter(taskAdapter);
-
-
+//        ArrayAdapter<Task> taskAdapter = new ArrayAdapter<Task>(this, android.R.layout.simple_list_item_1, array.list);
+//        tasksList.setAdapter(taskAdapter);
 
        // getActionBar().setTitle(mTitle);
-        ArrayAdapter<Task> taskArrayAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, (List) taskItems);
+        //ArrayAdapter<Task> taskArrayAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, (List) taskItems);
 
         mTitle = (String) getTitle();
         mDrawerTitle = "TaskListActivity List";
@@ -70,8 +62,9 @@ public class TaskListActivity extends ActionBarActivity implements NavigationCal
         TaskRepoInterface repo = RepositoryFactory.getTaskRepo();
         taskListItems = repo.getTaskLists();
 
-        ArrayAdapter listAdapter = new ArrayAdapter(this,
-                android.R.layout.simple_list_item_1, taskListItems);
+        //ArrayAdapter listAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, taskListItems);
+
+
 
         addTask = (FloatingActionButton) findViewById(R.id.fab);
 

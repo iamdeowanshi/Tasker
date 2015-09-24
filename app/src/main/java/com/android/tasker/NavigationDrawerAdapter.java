@@ -7,8 +7,8 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.tasker.model.TaskList;
 
@@ -22,9 +22,12 @@ public class NavigationDrawerAdapter extends RecyclerView.Adapter<NavigationDraw
     private int mTouchedPosition = -1;
     private NavigationCallBacks mNavigationCallbacks;
 
+
+
     public NavigationDrawerAdapter(List<TaskList> data, Context context) {
         mData = data;
         this.mContext = context;
+
     }
 
     public void setNavigationCallbacks(NavigationCallBacks navigationCallbacks) {
@@ -37,8 +40,10 @@ public class NavigationDrawerAdapter extends RecyclerView.Adapter<NavigationDraw
         return new ViewHolder(view);
     }
 
+
     @Override
     public void onBindViewHolder(NavigationDrawerAdapter.ViewHolder viewHolder, final int i) {
+        String message = mData.get(i).getName();
         viewHolder.textView.setText(mData.get(i).getName());
 
         /* handle gestures and click events */
@@ -47,10 +52,14 @@ public class NavigationDrawerAdapter extends RecyclerView.Adapter<NavigationDraw
         /* Highlight selected row */
         if (mSelectedPosition == i || mTouchedPosition == i) {
             viewHolder.itemView.setBackgroundColor(Color.parseColor("#BFD596"));
+            Toast.makeText(mContext, message, Toast.LENGTH_SHORT).show();
+
+
         } else {
             viewHolder.itemView.setBackgroundColor(Color.TRANSPARENT);
         }
     }
+
 
     private void handleRowEvents(View itemView, final int i) {
         itemView.setOnTouchListener(new View.OnTouchListener() {
@@ -107,7 +116,6 @@ public class NavigationDrawerAdapter extends RecyclerView.Adapter<NavigationDraw
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         TextView textView;
-        ImageView imageView;
 
         public ViewHolder(View itemView) {
             super(itemView);

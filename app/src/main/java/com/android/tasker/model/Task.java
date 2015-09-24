@@ -23,6 +23,10 @@ public class Task {
         this.finished = finished;
         this.taskListId = taskListId;
     }
+    @Override
+    public String toString() {
+        return getName();
+    }
 
     public int getId() {
         return id;

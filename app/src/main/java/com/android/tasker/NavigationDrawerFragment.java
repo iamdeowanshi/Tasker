@@ -13,7 +13,9 @@ import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
 
+import com.android.tasker.model.Task;
 import com.android.tasker.model.TaskList;
 import com.android.tasker.repository.RepositoryFactory;
 
@@ -27,8 +29,9 @@ public class NavigationDrawerFragment extends Fragment implements NavigationCall
     private View mFragmentContainerView;
     private DrawerLayout mDrawerLayout;
     private ActionBarDrawerToggle mActionBarDrawerToggle;
-
+    private List<Task> taskItems;
     private List<TaskList> taskListItems;
+    private ListView listView;
 
     private boolean mUserLearnedDrawer;
     private int mCurrentSelectedPosition;
@@ -55,6 +58,10 @@ public class NavigationDrawerFragment extends Fragment implements NavigationCall
         selectRow(mCurrentSelectedPosition);
 
         return view;
+    }
+
+    public int currentPosition() {
+        return selectedPosition;
     }
 
     @Override
@@ -145,6 +152,7 @@ public class NavigationDrawerFragment extends Fragment implements NavigationCall
     }
 
     void selectRow(int position) {
+
         mCurrentSelectedPosition = position;
         if (mDrawerLayout != null) {
             mDrawerLayout.closeDrawer(mFragmentContainerView);
