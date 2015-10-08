@@ -27,5 +27,8 @@
     <string name="title_activity_login">To-do</string>
 
     <string name="title_activity_register">Sign-Up</string>
+    <string name="title_activity_update_task">UpdateTask</string>
+
+    <string name="hello_world">Hello world!</string>
 
 </resources>

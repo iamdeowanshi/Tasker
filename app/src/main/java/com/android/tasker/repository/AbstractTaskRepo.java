@@ -5,27 +5,27 @@ package com.android.tasker.repository;
  */
 public abstract class AbstractTaskRepo implements TaskRepoInterface {
 
-    protected int userId;
+    protected long userId;
     protected String accessToken;
 
     @Override
-    public int getUserId() {
-        return 0;
+    public long getUserId() {
+        return userId;
     }
 
     @Override
-    public void setAccessToken() {
-
+    public void setAccessToken(String accessToken) {
+        this.accessToken = accessToken;
     }
 
     @Override
     public String getAccessToken() {
-        return null;
+        return accessToken;
     }
 
     @Override
-    public void setUserId() {
-
+    public void setUserId(long id) {
+        this.userId = id;
     }
 
 }

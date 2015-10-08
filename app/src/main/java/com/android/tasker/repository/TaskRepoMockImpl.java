@@ -20,87 +20,88 @@ public class TaskRepoMockImpl extends AbstractTaskRepo {
         user = new User(1, "Aaditya", "aadity@tecol.com", "1234", "https://pbs.twimg.com/profile_images/2156251289/MrBean.jpg", "AQ12adakfine#Fsdlj");
 
         // sample activity_task_list lists
+        taskLists.add(new TaskList(0, "Finished" ,1));
         taskLists.add(new TaskList(1, "Personal", 1));
         taskLists.add(new TaskList(2, "Work", 1));
         taskLists.add(new TaskList(3, "Default", 1));
 
         // sample tasks
         tasks.add(new Task(1, "Task One", "18:09:2015", "09:56:00", false, 1));
-        tasks.add(new Task(2, "Task Two", "18:09:2015", "09:56:00", true, 1));
+        tasks.add(new Task(2, "Task Two", "18:09:2015", "09:56:00", false, 1));
         tasks.add(new Task(3, "Task Three", "18:09:2015", "09:56:00", false, 2));
         tasks.add(new Task(4, "Task Four", "18:09:2015", "09:56:00", false, 2));
-        tasks.add(new Task(5, "Task Five", "18:09:2015", "09:56:00", true, 3));
+        tasks.add(new Task(5, "Task Five", "18:09:2015", "09:56:00", false, 3));
         tasks.add(new Task(6, "Task Six", "18:09:2015", "09:56:00", false, 3));
     }
 
     @Override
-    public User register(User user) {
+    public void register(User user, RepoCallBack<User> callBack) {
         this.user = user;
-        user.setId(1);
+        user.setUserId(1);
 
-        return user;
+        callBack.onSuccess(user);
     }
 
     @Override
-    public User login(String email, String password) {
+    public void login(String email, String password, RepoCallBack<User> callBack) {
         if (user != null && user.getEmail().equals(email) &&  user.getPassword().equals(password)) {
-            return user;
+            callBack.onSuccess(user);
         }
 
-        return null;
+        callBack.onFailure(null);
     }
 
     @Override
-    public User updateProfilePic(String profilePicUrl) {
-        user.setImage(profilePicUrl);
+    public void updateProfilePic(String profilePicUrl, RepoCallBack<User> callBack) {
+       // user.setImage(profilePicUrl);
 
-        return user;
+        callBack.onSuccess(user);
     }
 
     @Override
-    public List<TaskList> getTaskLists() {
-        return taskLists;
+    public void getTaskLists(RepoCallBack<List<TaskList>> callBack) {
+        callBack.onSuccess(taskLists);
     }
 
     @Override
-    public TaskList createTaskList(TaskList list) {
-        int lastId = taskLists.get(taskLists.size() - 1).getId();
+    public void createTaskList(TaskList list, RepoCallBack<TaskList> callBack) {
+        long lastId = taskLists.get(taskLists.size() - 1).getTaskListId();
 
-        list.setId(lastId + 1);
+        list.setTaskListId(lastId + 1);
         list.setUserId(1);
         taskLists.add(list);
 
-        return list;
+        callBack.onSuccess(list);
     }
 
     @Override
-    public TaskList updateTaskList(TaskList list) {
+    public void updateTaskList(TaskList list, RepoCallBack<TaskList> callBack) {
         for (TaskList taskList : taskLists) {
-            if (taskList.getId() == list.getId()) {
+            if (taskList.getTaskListId() == list.getTaskListId()) {
                 taskList.setName(list.getName());
 
-                return taskList;
+                callBack.onSuccess(taskList);
             }
         }
 
-        return null;
+        callBack.onFailure(null);
     }
 
     @Override
-    public TaskList deleteTaskList(int taskListId) {
+    public void deleteTaskList(int taskListId, RepoCallBack<TaskList> callBack) {
         for (TaskList taskList : taskLists) {
-            if (taskList.getId() == taskListId) {
+            if (taskList.getTaskListId() == taskListId) {
                 taskLists.remove(taskList);
 
-                return taskList;
+                callBack.onSuccess(taskList);
             }
         }
 
-        return null;
+        callBack.onFailure(null);
     }
 
     @Override
-    public List<Task> getTasks(int taskListId) {
+    public void getTasks(long taskListId, RepoCallBack<List<Task>> callBack) {
         List<Task> tasksOfList = new ArrayList<>();
 
         for (Task task : tasks) {
@@ -109,46 +110,47 @@ public class TaskRepoMockImpl extends AbstractTaskRepo {
             }
         }
 
-        return tasksOfList;
+        callBack.onSuccess(tasksOfList);
     }
 
     @Override
-    public Task createTask(Task task) {
-        int lastId = tasks.get(tasks.size() - 1).getId();
-        task.setId(lastId + 1);
+    public void createTask(Task task, RepoCallBack<Task> callBack) {
+        long lastId = tasks.get(tasks.size() - 1).getTaskId();
+        task.setTaskId(lastId + 1);
         tasks.add(task);
 
-        return task;
+        callBack.onSuccess(task);
     }
 
     @Override
-    public Task updateTask(Task taskToUpdate) {
+    public void updateTask(Task taskToUpdate, RepoCallBack<Task> callBack) {
         for (Task task : tasks) {
-            if (task.getId() == taskToUpdate.getId()) {
+            if (task.getTaskId() == taskToUpdate.getTaskId()) {
                 task.setName(taskToUpdate.getName());
                 task.setDate(taskToUpdate.getDate());
                 task.setTime(taskToUpdate.getTime());
                 task.setFinished(taskToUpdate.isFinished());
                 task.setTaskListId(taskToUpdate.getTaskListId());
 
-                return task;
+                callBack.onSuccess(task);
+                return;
             }
         }
 
-        return null;
+        callBack.onFailure(null);
     }
 
     @Override
-    public Task deleteTask(int taskId) {
+    public void deleteTask(long taskId, RepoCallBack<Task> callBack) {
         for (Task task : tasks) {
-            if (task.getId() == taskId) {
+            if (task.getTaskId() == taskId) {
                 tasks.remove(task);
-
-                return task;
+                callBack.onSuccess(task);
+                return;
             }
         }
 
-        return null;
+        callBack.onFailure(null);
     }
 
 }

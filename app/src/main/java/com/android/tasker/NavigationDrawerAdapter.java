@@ -8,7 +8,6 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.android.tasker.model.TaskList;
 
@@ -52,7 +51,7 @@ public class NavigationDrawerAdapter extends RecyclerView.Adapter<NavigationDraw
         /* Highlight selected row */
         if (mSelectedPosition == i || mTouchedPosition == i) {
             viewHolder.itemView.setBackgroundColor(Color.parseColor("#BFD596"));
-            Toast.makeText(mContext, message, Toast.LENGTH_SHORT).show();
+            //Toast.makeText(mContext, message, Toast.LENGTH_SHORT).show();
 
 
         } else {

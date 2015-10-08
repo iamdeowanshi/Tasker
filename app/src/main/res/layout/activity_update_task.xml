@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent" android:layout_height="fill_parent"
+    android:scrollbars="vertical"
+    android:background="#2199c0"
+    android:fillViewport="true">
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="vertical" android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingLeft="10dp"
+        android:paddingRight="5dp"
+        android:id="@+id/addTask"
+        android:background="#2199c0">
+
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="What is to be done ?"
+            android:id="@+id/textTask"
+            android:layout_marginTop="30dp"
+            android:textSize="20sp"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter Task Here."
+            android:textSize="23sp"
+            android:layout_marginTop="20dp"
+            android:id="@+id/editTextTask"
+            android:background="@drawable/curved_edit_text"
+            android:layout_below="@+id/textTask"
+            android:paddingLeft="5dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Due Date"
+            android:textSize="20sp"
+            android:layout_marginTop="20dp"
+            android:id="@+id/textDate"
+            android:layout_below="@+id/editTextTask"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:id="@+id/dateLayout"
+            android:layout_below="@+id/textDate">
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:textSize="23sp"
+                android:hint="Date Not Set"
+                android:id="@+id/editTextDate"
+                android:editable="false"
+                android:paddingLeft="5dp"
+                android:background="@drawable/curved_edit_text"/>
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/editTextTime"
+                android:textSize="23sp"
+                android:paddingLeft="5dp"
+                android:hint="Time Not Set"
+                android:layout_marginTop="20dp"
+                android:editable="false"
+                android:background="@drawable/curved_edit_text"/>
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Add to List"
+            android:id="@+id/textList"
+            android:textSize="20sp"
+            android:layout_below="@+id/checkBoxFinished"
+            android:layout_marginTop="20dp"/>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:id="@+id/listLayout"
+            android:layout_below="@+id/textList"
+            >
+
+            <Spinner
+                android:id="@+id/listSpinner"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_weight="1"/>
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/add_list"
+                android:layout_weight="5"
+                android:id="@+id/addList"/>
+        </LinearLayout>
+
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Update"
+            android:id="@+id/buttonAdd"
+            android:layout_below="@+id/listLayout"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"/>
+
+        <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Finished"
+            android:id="@+id/checkBoxFinished"
+            android:layout_below="@id/dateLayout"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="20dp"
+            android:textSize="23sp" />
+
+    </RelativeLayout>
+</ScrollView>

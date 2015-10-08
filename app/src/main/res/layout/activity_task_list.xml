@@ -13,14 +13,14 @@ android:layout_height="match_parent"
     android:layout_height="wrap_content" />
 
 
-    <fragment
-        android:id="@+id/fragment_task_list"
-        android:name="com.android.tasker.TaskListItems"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_gravity="start"
-        android:layout="@layout/task_items"
-        android:layout_below="@id/toolbar_actionbar"/>
+    <!--<fragment-->
+        <!--android:id="@+id/fragment_task_list"-->
+        <!--android:name="com.android.tasker.TaskListFragmentent"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:layout_gravity="start"-->
+        <!--android:layout="@layout/fragment_tasks"-->
+        <!--android:layout_below="@id/toolbar_actionbar"/>-->
 
 
 <android.support.v4.widget.DrawerLayout
@@ -35,8 +35,6 @@ android:layout_height="match_parent"
         android:layout_height="wrap_content"
         android:background="#c962acbb"
         android:clickable="true">
-
-
 
 
     <android.support.design.widget.FloatingActionButton

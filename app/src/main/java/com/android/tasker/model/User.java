@@ -1,16 +1,30 @@
 package com.android.tasker.model;
 
+import com.activeandroid.annotation.Column;
+import com.activeandroid.annotation.Table;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
 /**
  * Created by Sibi on 16/09/15.
  */
-public class User {
+@Table(name = "User")
+public class User extends BaseModel {
 
-    private int id;
+    @Column(name = "userId" )
+    private long userId;
+    @Column(name = "userName")
     private String name;
+    @Column(name = "userEmail")
     private String email;
+    @Column(name = "userPassword")
     private String password;
-    private String image;
+//    @Column(name = "userImage")
+//    private String image;
+
     private String accessToken;
+
     public User() {
     }
 
@@ -21,20 +35,20 @@ public class User {
     }
 
     public User(int id, String name, String email, String password, String image, String accessToken) {
-        this.id = id;
+        this.userId = id;
         this.name = name;
         this.email = email;
         this.password = password;
-        this.image = image;
+//        this.image = image;
         this.accessToken = accessToken;
     }
 
-    public int getId() {
-        return id;
+    public long getUserId() {
+        return userId;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 
     public String getName() {
@@ -61,14 +75,6 @@ public class User {
         this.password = password;
     }
 
-    public String getImage() {
-        return image;
-    }
-
-    public void setImage(String image) {
-        this.image = image;
-    }
-
     public String getAccessToken() {
         return accessToken;
     }
@@ -78,4 +84,37 @@ public class User {
     }
 
 
+    @Override
+    public String toJSON() {
+        try {
+            JSONObject jsonObj = new JSONObject();
+            jsonObj.put("name", name);
+            jsonObj.put("userId", userId);
+            jsonObj.put("email", email);
+            jsonObj.put("password", password);
+
+            return jsonObj.toString();
+        }
+
+        catch(JSONException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    @Override
+    public User fromJSON(String json) {
+        try {
+            JSONObject jsonObj = new JSONObject(json);
+            setName(jsonObj.getString("name"));
+            setEmail(jsonObj.getString("email"));
+            setPassword(jsonObj.getString("password"));
+            setUserId(jsonObj.getInt("userId"));
+            return this;
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
 }

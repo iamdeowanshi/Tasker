@@ -11,37 +11,37 @@ import java.util.List;
  */
 public interface TaskRepoInterface {
 
-    int getUserId();
+    long getUserId();
 
-    void setAccessToken();
+    void setAccessToken(String accessToken);
 
     String getAccessToken();
 
-    void setUserId();
+    void setUserId(long id);
 
-    User register(User user);
+    void register(User user, RepoCallBack<User> callBack);
 
-    User login(String email, String password);
+    void login(String email, String password, RepoCallBack<User> callBack);
 
-    User updateProfilePic(String profilePicUrl);
+    void updateProfilePic(String profilePicUrl, RepoCallBack<User> callBack);
 
     // activity_task_list list operations
-    List<TaskList> getTaskLists();
+    void getTaskLists(RepoCallBack<List<TaskList>> callBack);
 
-    TaskList createTaskList(TaskList list);
+    void createTaskList(TaskList list, RepoCallBack<TaskList> callBack);
 
-    TaskList updateTaskList(TaskList list);
+    void updateTaskList(TaskList list, RepoCallBack<TaskList> callBack);
 
-    TaskList deleteTaskList(int taskListId);
+    void deleteTaskList(int taskListId, RepoCallBack<TaskList> callBack);
 
     // activity_task_list operations
 
-    List<Task> getTasks(int taskListId);
+    void getTasks(long taskListId, RepoCallBack<List<Task>> callBack);
 
-    Task createTask(Task task);
+    void createTask(Task task, RepoCallBack<Task> callBack);
 
-    Task updateTask(Task task);
+    void updateTask(Task task, RepoCallBack<Task> callBack);
 
-    Task deleteTask(int taskId);
+    void deleteTask(long taskId, RepoCallBack<Task> callBack);
 
 }

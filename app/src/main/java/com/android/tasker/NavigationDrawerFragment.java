@@ -17,6 +17,7 @@ import android.widget.ListView;
 
 import com.android.tasker.model.Task;
 import com.android.tasker.model.TaskList;
+import com.android.tasker.repository.RepoCallBack;
 import com.android.tasker.repository.RepositoryFactory;
 
 import java.util.List;
@@ -35,7 +36,19 @@ public class NavigationDrawerFragment extends Fragment implements NavigationCall
 
     private boolean mUserLearnedDrawer;
     private int mCurrentSelectedPosition;
-    private int selectedPosition = 0;
+    private int selectedPosition = 1;
+
+    RepoCallBack<List<TaskList>> listRepoCallBack = new RepoCallBack<List<TaskList>>() {
+        @Override
+        public void onSuccess(List<TaskList> data) {
+            taskListItems = data;
+        }
+
+        @Override
+        public void onFailure(Throwable tr) {
+
+        }
+    };
 
     @Nullable
     @Override
@@ -49,7 +62,7 @@ public class NavigationDrawerFragment extends Fragment implements NavigationCall
         mDrawerList.setLayoutManager(layoutManager);
         mDrawerList.setHasFixedSize(true);
 
-        taskListItems = RepositoryFactory.getTaskRepo().getTaskLists();
+        RepositoryFactory.getTaskRepo().getTaskLists(listRepoCallBack);
         NavigationDrawerAdapter adapter = new NavigationDrawerAdapter(taskListItems, getActivity());
         adapter.setNavigationCallbacks(this);
 
@@ -58,10 +71,6 @@ public class NavigationDrawerFragment extends Fragment implements NavigationCall
         selectRow(mCurrentSelectedPosition);
 
         return view;
-    }
-
-    public int currentPosition() {
-        return selectedPosition;
     }
 
     @Override
@@ -124,10 +133,6 @@ public class NavigationDrawerFragment extends Fragment implements NavigationCall
         mCallbacks = null;
     }
 
-    public List<TaskList> getDrawerItems() {
-        return taskListItems;
-    }
-
     public boolean isDrawerOpen() {
         return mDrawerLayout != null && mDrawerLayout.isDrawerOpen(mFragmentContainerView);
     }
@@ -163,6 +168,10 @@ public class NavigationDrawerFragment extends Fragment implements NavigationCall
             mCallbacks.onItemSelected(position);
         }
         ((NavigationDrawerAdapter) mDrawerList.getAdapter()).setSelectedRow(position);
+    }
+
+    public int getSelectedPosition(){
+        return selectedPosition;
     }
 
 }

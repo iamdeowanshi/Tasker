@@ -2,6 +2,7 @@ package com.android.tasker;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.view.View;
@@ -10,6 +11,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.android.tasker.model.User;
+import com.android.tasker.repository.RepoCallBack;
 import com.android.tasker.repository.RepositoryFactory;
 import com.android.tasker.repository.TaskRepoInterface;
 
@@ -21,6 +23,27 @@ public class RegisterActivity extends AppCompatActivity {
     private EditText password;
     private EditText confirmPassword;
     private SharedPreferences userData;
+
+    private Handler handler;
+
+    RepoCallBack<User> registerCallback = new RepoCallBack<User>() {
+        @Override
+        public void onSuccess(final User data) {
+            handler.post(new Runnable() {
+                @Override
+                public void run() {
+                    Toast.makeText(getApplicationContext(), "Registered " + data.getName(), Toast.LENGTH_SHORT).show();
+                    finish();
+                }
+            });
+        }
+
+        @Override
+        public void onFailure(Throwable tr) {
+
+        }
+    };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,6 +51,8 @@ public class RegisterActivity extends AppCompatActivity {
 
         android.support.v7.app.ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
+
+        handler = new Handler();
 
         name = (EditText)findViewById(R.id.textName);
         email = (EditText)findViewById(R.id.textEmail);
@@ -52,15 +77,10 @@ public class RegisterActivity extends AppCompatActivity {
                     editor.putString("password", userPassword);
                     editor.commit();
 
-
                     User user = new User(userName, userEmail, userPassword);
 
                     TaskRepoInterface taskRepo = RepositoryFactory.getTaskRepo();
-                    taskRepo.register(user);
-
-                    Toast.makeText(getApplicationContext(), "Registered", Toast.LENGTH_SHORT).show();
-
-                    finish();
+                    taskRepo.register(user, registerCallback);
                 }
                 else {
                     Toast.makeText(getApplicationContext(), "Try Again", Toast.LENGTH_SHORT).show();
@@ -79,7 +99,8 @@ public class RegisterActivity extends AppCompatActivity {
             return android.util.Patterns.EMAIL_ADDRESS.matcher(target).matches();
         }
     }
-/*
+
+    /*
     void selectOption() {
             final CharSequence[] items = { "Take Photo", "Choose from Gallery", "Cancel" };
             AlertDialog.Builder builder = new AlertDialog.Builder(RegisterActivity.this);

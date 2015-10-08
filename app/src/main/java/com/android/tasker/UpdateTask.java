@@ -23,50 +23,26 @@ import com.android.tasker.model.Task;
 import com.android.tasker.model.TaskList;
 import com.android.tasker.repository.RepoCallBack;
 import com.android.tasker.repository.RepositoryFactory;
+import com.android.tasker.repository.TaskRepoInterface;
 
 import java.util.Calendar;
 import java.util.List;
 
-/**
- * Created by Sibi on 15/09/15.
- */
-public class AddTaskActivity extends AppCompatActivity {
+public class UpdateTask extends AppCompatActivity {
 
     private Spinner spinner;
     private EditText edtDate;
     private EditText edtTaskName;
     private EditText edtTime;
-    private Button buttonAdd;
+    private Button buttonUpdate;
     private CheckBox checkBoxFinished;
-    public List<TaskList> taskListItems;
+    private List<TaskList> taskListItems;
     private ImageView imageAddList;
-    int mDay,mMonth,mYear;
-    int min,hr;
+    int mDay, mMonth, mYear;
+    int min, hr;
     private Context context = this;
-
-    RepoCallBack<List<TaskList>> listRepoCallBack = new RepoCallBack<List<TaskList>>() {
-        @Override
-        public void onSuccess(List<TaskList> data) {
-           taskListItems = data;
-        }
-
-        @Override
-        public void onFailure(Throwable tr) {
-
-        }
-    };
-
-    RepoCallBack<Task> createTaskRepoCallBack = new RepoCallBack<Task>() {
-        @Override
-        public void onSuccess(Task data) {
-
-        }
-
-        @Override
-        public void onFailure(Throwable tr) {
-
-        }
-    };
+    private List<Task> taskItems;
+    private Task task;
 
     RepoCallBack<TaskList> createTaskListRepoCallBack = new RepoCallBack<TaskList>() {
         @Override
@@ -80,13 +56,39 @@ public class AddTaskActivity extends AppCompatActivity {
         }
     };
 
+    RepoCallBack<Task> updateTaskCallBack = new RepoCallBack<Task>() {
+        @Override
+        public void onSuccess(Task data) {
+
+        }
+
+        @Override
+        public void onFailure(Throwable tr) {
+
+        }
+    };
+
+    RepoCallBack<List<TaskList>> listRepoCallBack = new RepoCallBack<List<TaskList>>() {
+        @Override
+        public void onSuccess(List<TaskList> data) {
+            taskListItems = data;
+        }
+
+        @Override
+        public void onFailure(Throwable tr) {
+
+        }
+    };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_task_add);
+        setContentView(R.layout.activity_update_task);
+
+        final Task task = getIntent().getExtras().getParcelable("Task");
+
         RepositoryFactory.getTaskRepo().getTaskLists(listRepoCallBack);
         spinner = (Spinner) findViewById(R.id.listSpinner);
-
 
 
         ArrayAdapter<TaskList> adapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item, taskListItems);
@@ -94,18 +96,24 @@ public class AddTaskActivity extends AppCompatActivity {
         spinner.setAdapter(adapter);
 
 
-
         edtTaskName = (EditText) findViewById(R.id.editTextTask);
         edtDate = (EditText) findViewById(R.id.editTextDate);
         edtTime = (EditText) findViewById(R.id.editTextTime);
-        buttonAdd = (Button) findViewById(R.id.buttonAdd);
+        buttonUpdate = (Button) findViewById(R.id.buttonAdd);
         imageAddList = (ImageView) findViewById(R.id.addList);
         checkBoxFinished = (CheckBox) findViewById(R.id.checkBoxFinished);
-        spinner.setSelection(0);
+        long taskListId = task.getTaskListId();
+
+        edtTaskName.setText(task.getName());
+        edtDate.setText(task.getDate());
+        edtTime.setText(task.getTime());
+        checkBoxFinished.setChecked(task.isFinished());
+        spinner.setSelection((int) taskListId);
+
 
         imageAddList.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(final View view) {
+            public void onClick(View view) {
                 // create a Dialog component
                 final Dialog dialog = new Dialog(context);
 
@@ -116,7 +124,7 @@ public class AddTaskActivity extends AppCompatActivity {
                 final EditText listEditText = (EditText) dialog.findViewById(R.id.editTextAddList);
                 Button addButton = (Button) dialog.findViewById(R.id.buttonAddList);
 
-               // final TaskRepoInterface repo = RepositoryFactory.getTaskRepo();
+                final TaskRepoInterface repo = RepositoryFactory.getTaskRepo();
                 final TaskList taskList = new TaskList();
 
                 addButton.setOnClickListener(new View.OnClickListener() {
@@ -130,9 +138,8 @@ public class AddTaskActivity extends AppCompatActivity {
                         } else {
 
                             taskList.setName(listName);
-                            RepositoryFactory.getTaskRepo().createTaskList(taskList, createTaskListRepoCallBack);
-                            view.invalidate();
-                            spinner.setSelection((int)taskList.getTaskListId()-1);
+                            repo.createTaskList(taskList, createTaskListRepoCallBack);
+                            spinner.setSelection((int) taskList.getTaskListId() - 1);
                             String message = taskList.getName();
                             Toast.makeText(getApplicationContext(), "is:" + message, Toast.LENGTH_SHORT).show();
                             dialog.dismiss();
@@ -154,7 +161,7 @@ public class AddTaskActivity extends AppCompatActivity {
                 mMonth = currentDate.get(Calendar.MONTH);
                 mDay = currentDate.get(Calendar.DAY_OF_MONTH);
 
-                DatePickerDialog mDatePicker = new DatePickerDialog(AddTaskActivity.this, new DatePickerDialog.OnDateSetListener() {
+                DatePickerDialog mDatePicker = new DatePickerDialog(UpdateTask.this, new DatePickerDialog.OnDateSetListener() {
                     public void onDateSet(DatePicker datepicker, int selectedyear, int selectedmonth, int selectedday) {
                         edtDate.setText(mDay + "-" + mMonth + "-" + mYear);
                     }
@@ -171,7 +178,7 @@ public class AddTaskActivity extends AppCompatActivity {
                 min = currentTime.get(Calendar.MINUTE);
                 hr = currentTime.get(Calendar.HOUR);
 
-                TimePickerDialog mTimePicker = new TimePickerDialog(AddTaskActivity.this, new TimePickerDialog.OnTimeSetListener() {
+                TimePickerDialog mTimePicker = new TimePickerDialog(UpdateTask.this, new TimePickerDialog.OnTimeSetListener() {
                     @Override
                     public void onTimeSet(TimePicker timePicker, int hr, int min) {
                         edtTime.setText(hr + ":" + min);
@@ -185,23 +192,22 @@ public class AddTaskActivity extends AppCompatActivity {
 
         });
 
-        buttonAdd.setOnClickListener(new View.OnClickListener() {
+        buttonUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String taskName = edtTaskName.getText().toString();
                 String date = edtDate.getText().toString();
                 String time = edtTime.getText().toString();
                 boolean finished = checkBoxFinished.isChecked();
-                int taskListId = spinner.getSelectedItemPosition();
+                long taskListId = spinner.getSelectedItemPosition();
+                long id = task.getTaskId();
 
                 if (finished) {
                     taskListId = 3;
-                    Toast.makeText(getApplicationContext() , "Added to Finished List", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "Added to Finished List", Toast.LENGTH_SHORT).show();
                 }
-
-                Task task = new Task(taskName, date, time, finished, taskListId);
-                RepositoryFactory.getTaskRepo().createTask(task, createTaskRepoCallBack );
-                Toast.makeText(getApplicationContext(), "Added to" + taskListItems.get(taskListId).getName(), Toast.LENGTH_SHORT).show();
+                Task task = new Task(id, taskName, date, time, finished, taskListId);
+                RepositoryFactory.getTaskRepo().updateTask(task, updateTaskCallBack);
                 finish();
             }
         });
@@ -210,6 +216,7 @@ public class AddTaskActivity extends AppCompatActivity {
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
     }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -221,6 +228,4 @@ public class AddTaskActivity extends AppCompatActivity {
                 return super.onOptionsItemSelected(item);
         }
     }
-
-
 }
