@@ -1,3 +1,3 @@
 # Tasker-  Android Application
 
-Sample android application to to perform CRUD operation on tasks.
+Sample android application to perform CRUD operation on tasks.
